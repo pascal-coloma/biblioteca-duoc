@@ -32,4 +32,9 @@ public class LibroService {
         libroRepository.eliminar(id);
         return "Libro eliminado";
     }
+
+    public String guardarArreglo(List <Libro> listLibro){
+        libroRepository.guardarArregloLibro(listLibro);
+        return "Arreglo guardado";
+    }
 }

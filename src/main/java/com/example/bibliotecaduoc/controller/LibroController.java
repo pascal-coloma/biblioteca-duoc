@@ -29,9 +29,14 @@ public class LibroController {
         return libroService.getLibros();
     }
     
-    @PostMapping
-    public Libro agregarLibro(@RequestBody Libro libro){
-        return libroService.saveLibro(libro);
+    //@PostMapping
+    //public Libro agregarLibro(@RequestBody Libro libro){
+    //    return libroService.saveLibro(libro);
+    //}
+
+    @PostMapping 
+    public String guardarArreglo(@RequestBody List<Libro> listLibro){
+        return libroService.guardarArreglo(listLibro);
     }
 
     @GetMapping("{id}")

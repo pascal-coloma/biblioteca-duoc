@@ -71,4 +71,11 @@ public class LibroRepository {
             listaLibros.remove(libro);
         }
     }
+
+    public boolean guardarArregloLibro(List <Libro> listLibro){
+        for (Libro libro : listLibro){
+            listaLibros.add(libro);
+        }
+        return true;
+    }
 }
