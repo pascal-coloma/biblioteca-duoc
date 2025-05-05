@@ -37,4 +37,8 @@ public class LibroService {
         libroRepository.guardarArregloLibro(listLibro);
         return "Arreglo guardado";
     }
+
+    public int totalLibros(){
+        return libroRepository.totalLibros();
+    }
 }
