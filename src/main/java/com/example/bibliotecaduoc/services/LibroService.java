@@ -41,4 +41,29 @@ public class LibroService {
     public int totalLibros(){
         return libroRepository.totalLibros();
     }
+
+    public Libro getLibroIsbn(String isbn){
+        return libroRepository.busqIsbn(isbn);
+    }
+
+    public int totalAnnos(int anno){
+        return libroRepository.totalAnios(anno);
+    }
+
+    public List<Libro> busqAutor(String autor){
+        return libroRepository.busqAutor(autor);
+    }
+
+    public Libro libroMasAntiguo(){
+        return libroRepository.obtenerLibroMasAntiguo();
+    }
+
+    public Libro libroNuevo(){
+        return libroRepository.libroMasNuevo();
+    }
+
+    public List<Libro> listaOrdenada(){
+        return libroRepository.listaOrdenada();
+    }
+
 }

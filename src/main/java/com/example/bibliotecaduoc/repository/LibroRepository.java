@@ -3,8 +3,11 @@ package com.example.bibliotecaduoc.repository;
 import com.example.bibliotecaduoc.model.Libro;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
+import java.util.stream.Collectors;
+
+
 
 @Repository
 public class LibroRepository {
@@ -40,10 +43,10 @@ public class LibroRepository {
         }
         return null;
     }
-
-    public Libro buscarPorIsbn(String isbn){
-        for (Libro libro : listaLibros){
-            if (libro.getIsbn().equals(isbn)){
+    // Busqueda por ISBN
+    public Libro busqIsbn(String isbn){
+        for (Libro libro : listaLibros) {
+            if (isbn.equals(libro.getIsbn())) {
                 return libro;
             }
         }
@@ -85,6 +88,7 @@ public class LibroRepository {
         }
     }
 
+    // Se guarda un conjunto de datos en JSON
     public boolean guardarArregloLibro(List <Libro> listLibro){
         for (Libro libro : listLibro){
             listaLibros.add(libro);
@@ -95,6 +99,55 @@ public class LibroRepository {
     public int totalLibros(){
         return listaLibros.size();
     }
+
+    // Conteo de libros por año de publicacion
+    public int totalAnios(int anno){
+        int cont = 0;
+        for (Libro libro : listaLibros) {
+            if (anno == libro.getFechaPublicacion()) {
+                cont += 1;  
+            }
+        }
+        return cont;
+    }
+    
+    
+    // Busqueda de libros por autor, devuelve una lista si el autor tiene más de uno 
+    public List<Libro> busqAutor(String autor){
+        List <Libro> listaPorAutor = new ArrayList<>();
+        for (Libro libro : listaLibros) {
+            if (libro.getAutor().toLowerCase().contains(autor.toLowerCase())) {
+                listaPorAutor.add(libro);    
+            }       
+        }
+        return listaPorAutor; 
+    }
+
+    // Encuentra y devuelve el libro mas antiguo
+
+    public Libro obtenerLibroMasAntiguo() {
+        return listaLibros.stream()
+                .min(Comparator.comparingInt(Libro::getFechaPublicacion))
+                .orElse(null);
+    }
+
+    public Libro libroMasNuevo() {
+        return listaLibros.stream()
+                .max(Comparator.comparingInt(Libro::getFechaPublicacion))
+                .orElse(null);
+    }
+
+    public List<Libro> listaOrdenada(){
+        return listaLibros.stream()
+                          .sorted(Comparator.comparingInt(Libro::getFechaPublicacion))
+                          .collect(Collectors.toList());
+    }
+        
+    
+        
+
+
+
 
 
 }   

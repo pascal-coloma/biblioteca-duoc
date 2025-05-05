@@ -26,6 +26,27 @@ public class LibroController {
     @Autowired
     private LibroService libroService;
 
+    @GetMapping("/busIsbn")
+    public Libro busqIsbn(@RequestParam String isbn){
+        return libroService.getLibroIsbn(isbn);
+    }
+    
+    @GetMapping("/annoPubl")
+    public int totalAnios(@RequestParam int anno){
+        return libroService.totalAnnos(anno);
+    }
+
+    @GetMapping("/busqAutor")
+    public List<Libro> busqAutor(@RequestParam String autor){
+        return libroService.busqAutor(autor);
+    }
+    
+
+    @GetMapping("/total")
+    public int totalLibros(){
+        return libroService.totalLibros();
+    }
+
     @GetMapping
     public List<Libro> listarLibros(){
         return libroService.getLibros();
@@ -56,10 +77,26 @@ public class LibroController {
         return libroService.deleteLibro(id);
     }
 
-    @GetMapping("/total")
-    public int totalLibros(){
-        return libroService.totalLibros();
+    @GetMapping("/antiguo")
+    public Libro getlibroAntiguo(){
+        return libroService.libroMasAntiguo();
     }
+    
+    @GetMapping("/nuevo")
+    public Libro getLibroNuevo(){
+        return libroService.libroNuevo();
+    }
+
+    @GetMapping("/ordenlista")
+    public List<Libro> getListaOrdenada(){
+        return libroService.listaOrdenada();
+
+    }
+    
+    
+    
+
+    
 
 
 }
